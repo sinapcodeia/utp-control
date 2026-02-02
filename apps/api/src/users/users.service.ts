@@ -159,7 +159,7 @@ export class UsersService {
       data: {
         ...rest,
         permissions: rest.permissions
-          ? (rest.permissions as Prisma.InputJsonValue)
+          ? (rest.permissions as Prisma.JsonValue)
           : undefined,
         acceptedTerms: (rest as any).acceptedTerms,
         acceptedAt: (rest as any).acceptedAt,
