@@ -1,7 +1,8 @@
 FROM node:22-alpine AS base
 
-# Instalar pnpm
-RUN corepack enable && corepack prepare pnpm@9 --activate
+# Instalar pnpm y dependencias de sistema para Prisma
+RUN apk add --no-cache openssl libc6-compat && \
+    corepack enable && corepack prepare pnpm@9 --activate
 
 WORKDIR /app
 
@@ -37,7 +38,8 @@ RUN pnpm run build
 # ============================================
 FROM node:22-alpine AS production
 
-RUN corepack enable && corepack prepare pnpm@9 --activate
+RUN apk add --no-cache openssl libc6-compat && \
+    corepack enable && corepack prepare pnpm@9 --activate
 
 WORKDIR /app
 
