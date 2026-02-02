@@ -27,7 +27,7 @@ FROM dependencies AS build
 WORKDIR /app/apps/api
 
 # Generar cliente Prisma
-RUN npx prisma generate
+RUN pnpm exec prisma generate
 
 # Compilar la aplicación NestJS
 RUN pnpm run build
@@ -55,7 +55,7 @@ COPY --from=build /app/apps/api/dist ./dist
 COPY --from=build /app/apps/api/prisma ./prisma
 
 # Generar Prisma Client en producción
-RUN npx prisma generate
+RUN pnpm exec prisma generate
 
 # Crear usuario no-root para seguridad
 RUN addgroup -g 1001 -S nodejs && \
