@@ -1,0 +1,50 @@
+--- TEST: Territory Governance Logic ---
+
+[ADMIN] Checking Scope...
+PrismaClientValidationError: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\UTP\CONTROL\apps\api\src\services\TerritoryService.ts:12:40
+
+   9  * @returns Objeto con IDs permitidos de Regiones, Municipios y Veredas.
+  10  */
+  11 static async getUserScope(userId: string) {
+→ 12     const user = await prisma.user.findUnique({
+           where: {
+             id: "0f6d9ac7-4ea1-4ae2-828b-d42d82152142"
+           },
+           include: {
+             assignedRegions: {
+               include: {
+                 municipalities: {
+                 ~~~~~~~~~~~~~~
+                   include: {
+                     veredas: true
+                   }
+                 },
+         ?       users?: true,
+         ?       reports?: true,
+         ?       generatedReports?: true,
+         ?       visits?: true,
+         ?       documents?: true,
+         ?       assignedUsers?: true
+               }
+             },
+             assignedMunicipalities: {
+               include: {
+                 veredas: true
+               }
+             },
+             assignedVeredas: true
+           }
+         })
+
+Unknown field `municipalities` for include statement on model `Region`. Available options are marked with ?.
+    at In (C:\UTP\CONTROL\apps\api\node_modules\@prisma\client\runtime\library.js:114:7526)
+    at Ln.handleRequestError (C:\UTP\CONTROL\apps\api\node_modules\@prisma\client\runtime\library.js:121:7396)
+    at Ln.handleAndLogRequestError (C:\UTP\CONTROL\apps\api\node_modules\@prisma\client\runtime\library.js:121:7061)
+    at Ln.request (C:\UTP\CONTROL\apps\api\node_modules\@prisma\client\runtime\library.js:121:6745)
+    at async l (C:\UTP\CONTROL\apps\api\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async Function.getUserScope (C:\UTP\CONTROL\apps\api\src\services\TerritoryService.ts:12:22)
+    at async main (C:\UTP\CONTROL\apps\api\scripts\test-territory-logic.ts:21:24) {
+  clientVersion: '5.19.1'
+}

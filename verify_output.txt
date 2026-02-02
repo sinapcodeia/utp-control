@@ -1,0 +1,33 @@
+--- VERIFYING USERS ---
+Public Users: [
+  {
+    "id": "94392bc9-8430-43f6-8baa-165505003d4c",
+    "email": "admin@test.com",
+    "role": "ADMIN",
+    "dni": "TEST-ADMIN-001"
+  },
+  {
+    "id": "5124ba7f-9e82-4526-9f83-1e81e2dc6100",
+    "email": "gestor@test.com",
+    "role": "USER",
+    "dni": "TEST-GESTOR-001"
+  }
+]
+Auth Users: [
+  {
+    "id": "94392bc9-8430-43f6-8baa-165505003d4c",
+    "email": "admin@test.com",
+    "raw_user_meta_data": {
+      "dni": "TEST-ADMIN-001",
+      "full_name": "Admin de Prueba"
+    }
+  },
+  {
+    "id": "5124ba7f-9e82-4526-9f83-1e81e2dc6100",
+    "email": "gestor@test.com",
+    "raw_user_meta_data": {
+      "dni": "TEST-GESTOR-001",
+      "full_name": "Gestor de Prueba"
+    }
+  }
+]

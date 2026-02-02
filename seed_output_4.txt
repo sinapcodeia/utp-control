@@ -1,0 +1,37 @@
+Starting Test User Seed (V2) - Auth & Public Sync...
+Processing admin@test.com...
+Deleted public user admin@test.com: 1
+Deleted auth user admin@test.com: 0
+Failed to create/update auth user admin@test.com: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\UTP\CONTROL\apps\api\scripts\seed-test-users-v2.js:133:49
+Processing coord@test.com...
+
+  130 // We need to wait a ms or just update public.users immediately.
+  131 
+  132 // Check if user exists in public
+ÔåÆ 133 const check = await prisma.user.findUnique(
+The column `users.passwordHash` does not exist in the current database.
+Deleted public user coord@test.com: 1
+Deleted auth user coord@test.com: 0
+Failed to create/update auth user coord@test.com: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\UTP\CONTROL\apps\api\scripts\seed-test-users-v2.js:133:49
+
+  130 // We need to wait a ms or just update public.users immediately.
+  131 
+  132 // Check if user exists in public
+ÔåÆ 133 const check = await prisma.user.findUnique(
+The column `users.passwordHash` does not exist in the current database.
+Processing gestor@test.com...
+Deleted public user gestor@test.com: 1
+Deleted auth user gestor@test.com: 0
+Failed to create/update auth user gestor@test.com: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\UTP\CONTROL\apps\api\scripts\seed-test-users-v2.js:133:49
+
+  130 // We need to wait a ms or just update public.users immediately.
+  131 
+  132 // Check if user exists in public
+ÔåÆ 133 const check = await prisma.user.findUnique(
+The column `users.passwordHash` does not exist in the current database.

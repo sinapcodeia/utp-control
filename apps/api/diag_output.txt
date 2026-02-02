@@ -1,0 +1,181 @@
+--- DB DIAGNOSIS v2 ---
+Users in DB:
+┌─────────┬────────────────────────────────────────┬──────────────────────────────────┬───────────────┬────────────────────────────┐
+│ (index) │ id                                     │ email                            │ role          │ fullName                   │
+├─────────┼────────────────────────────────────────┼──────────────────────────────────┼───────────────┼────────────────────────────┤
+│ 0       │ '8c85e9dd-0f04-454c-a24a-cdd97c60f0f3' │ 'test1769551733191@example.com'  │ 'COORDINATOR' │ 'Test User 1769551733191'  │
+│ 1       │ 'U-001'                                │ 'admin@utp.gov'                  │ 'ADMIN'       │ 'Administrador Regional'   │
+│ 2       │ 'gestor-001'                           │ 'juan.sanchez@utp.com'           │ 'GESTOR'      │ 'Juan Sánchez'             │
+│ 3       │ '69394a49-bdd1-4b4a-a163-1cd8ef72ee64' │ 'antonio_rburgos@msn.com'        │ 'ADMIN'       │ 'Antonio Burgos'           │
+│ 4       │ 'c50b23d9-24f7-482c-bbbd-65fa1ad8f52b' │ 'antoniorodriguezutep@gmail.com' │ 'GESTOR'      │ 'Antonio Rodriguez'        │
+│ 5       │ 'gestor-002'                           │ 'ana.rivera@utp.com'             │ 'GESTOR'      │ 'Ana Rivera'               │
+│ 6       │ 'gestor-003'                           │ 'miguel.gomez@utp.com'           │ 'GESTOR'      │ 'Miguel Gómez'             │
+│ 7       │ 'gestor-004'                           │ 'carmen.rodriguez@utp.com'       │ 'GESTOR'      │ 'Carmen Rodríguez'         │
+│ 8       │ 'gestor-005'                           │ 'javier.martinez@utp.com'        │ 'GESTOR'      │ 'Javier Martínez'          │
+│ 9       │ 'gestor-006'                           │ 'laura.sanchez@utp.com'          │ 'GESTOR'      │ 'Laura Sánchez'            │
+│ 10      │ 'gestor-007'                           │ 'pedro.pera@utp.com'             │ 'GESTOR'      │ 'Pedro Pera'               │
+│ 11      │ 'gestor-008'                           │ 'juan.mora@utp.com'              │ 'GESTOR'      │ 'Juan Mora'                │
+│ 12      │ 'gestor-009'                           │ 'olga.perez@utp.com'             │ 'GESTOR'      │ 'Olga Pérez'               │
+│ 13      │ '94392bc9-8430-43f6-8baa-165505003d4c' │ 'admin@test.com'                 │ 'ADMIN'       │ 'Admin de Prueba'          │
+│ 14      │ '5124ba7f-9e82-4526-9f83-1e81e2dc6100' │ 'gestor@test.com'                │ 'GESTOR'      │ 'Gestor de Prueba'         │
+│ 15      │ '6896e280-2a58-486a-9bac-0ffcb8d3d63f' │ 'coord@test.com'                 │ 'COORDINATOR' │ 'Coordinador Multi-Región' │
+│ 16      │ 'a99ac143-66b7-4c3b-9b5f-e9a7086791cb' │ 'jarburgos40@gmail.com'          │ 'COORDINATOR' │ 'jarburgos40'              │
+└─────────┴────────────────────────────────────────┴──────────────────────────────────┴───────────────┴────────────────────────────┘
+
+Visits in DB:
+[
+  {
+    id: 'visit-001',
+    fullName: 'Ciudadano 1',
+    assignedTo: 'juan.sanchez@utp.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-002',
+    fullName: 'Ciudadano 2',
+    assignedTo: 'ana.rivera@utp.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-003',
+    fullName: 'Ciudadano 3',
+    assignedTo: 'miguel.gomez@utp.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-004',
+    fullName: 'Familia 4',
+    assignedTo: 'carmen.rodriguez@utp.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-005',
+    fullName: 'Familia 5',
+    assignedTo: 'javier.martinez@utp.com',
+    status: 'COMPLETED',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-006',
+    fullName: 'Familia 6',
+    assignedTo: 'laura.sanchez@utp.com',
+    status: 'COMPLETED',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-007',
+    fullName: 'Familia 7',
+    assignedTo: 'pedro.pera@utp.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-008',
+    fullName: 'Familia 8',
+    assignedTo: 'juan.mora@utp.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-009',
+    fullName: 'Familia 9',
+    assignedTo: 'olga.perez@utp.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-010',
+    fullName: 'Familia 10',
+    assignedTo: 'UNASSIGNED',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-011',
+    fullName: 'Familia 11',
+    assignedTo: 'UNASSIGNED',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'visit-012',
+    fullName: 'Familia 12',
+    assignedTo: 'UNASSIGNED',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: '8fc7f865-8ed9-4255-ac46-098b3ac281b8',
+    fullName: 'Unidad Productiva 1',
+    assignedTo: 'gestor@test.com',
+    status: 'COMPLETED',
+    scheduledAt: null
+  },
+  {
+    id: 'bd482c8d-bc26-48da-83b0-0b384998f748',
+    fullName: 'Unidad Productiva 2',
+    assignedTo: 'gestor@test.com',
+    status: 'COMPLETED',
+    scheduledAt: null
+  },
+  {
+    id: '4a6fe6b9-d177-4832-8430-e64b1f55437f',
+    fullName: 'Unidad Productiva 3',
+    assignedTo: 'gestor@test.com',
+    status: 'COMPLETED',
+    scheduledAt: null
+  },
+  {
+    id: '016d6981-5ce9-4f73-a657-718cf6312196',
+    fullName: 'Unidad Productiva 4',
+    assignedTo: 'gestor@test.com',
+    status: 'COMPLETED',
+    scheduledAt: null
+  },
+  {
+    id: '063f34d9-cf36-41a1-87b7-3c1c1cb7d4b7',
+    fullName: 'UP El Carmen',
+    assignedTo: 'gestor@test.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: 'e2555a74-a059-4bb2-8d0e-97915649a44e',
+    fullName: 'UP Las Flores',
+    assignedTo: 'gestor@test.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: '18f84d39-9fcb-43e7-9f3a-a66e5cfc1289',
+    fullName: 'UP San José',
+    assignedTo: 'gestor@test.com',
+    status: 'PENDING',
+    scheduledAt: null
+  },
+  {
+    id: '0c62e880-1678-43f5-9641-de81de9e83d6',
+    fullName: 'UP San José (Campo)',
+    assignedTo: 'antoniorodriguezutep@gmail.com',
+    status: 'PENDING',
+    scheduledAt: 2026-01-29T08:12:54.210Z
+  },
+  {
+    id: 'caed4ac5-1d7f-47c8-b16b-9bbc4c969ad7',
+    fullName: 'UP El Carmen (Operativo)',
+    assignedTo: 'antoniorodriguezutep@gmail.com',
+    status: 'PENDING',
+    scheduledAt: 2026-01-29T10:12:54.210Z
+  },
+  {
+    id: 'dbbcada4-4bee-4571-8413-84c3fc9ff50b',
+    fullName: 'UP Las Flores (Ruta)',
+    assignedTo: 'antoniorodriguezutep@gmail.com',
+    status: 'PENDING',
+    scheduledAt: 2026-01-29T12:12:54.210Z
+  }
+]

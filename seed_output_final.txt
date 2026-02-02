@@ -1,0 +1,20 @@
+Starting Test User Seed (V2) - Auth & Public Sync...
+Processing admin@test.com...
+Deleted public user admin@test.com: 1
+Deleted auth user admin@test.com: 1
+Ô£à Success: admin@test.com
+Processing coord@test.com...
+Error cleaning user coord@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Server has closed the connection.
+Failed to create/update auth user coord@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `23505`. Message: `Key (email)=(coord@test.com) already exists.`
+Processing gestor@test.com...
+Deleted public user gestor@test.com: 1
+Deleted auth user gestor@test.com: 1
+Ô£à Success: gestor@test.com

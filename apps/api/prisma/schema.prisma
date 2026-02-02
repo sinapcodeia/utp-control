@@ -1,0 +1,395 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ENUMS
+enum Role {
+  ADMIN
+  COORDINATOR
+  GESTOR
+  USER
+  SUPPORT
+}
+
+enum ReportType {
+  GENERAL
+  REGIONAL
+  ALERT
+  AUDIT
+}
+
+enum ReportFormat {
+  PDF
+  XLSX
+  DOCX
+}
+
+enum DeliveryChannel {
+  EMAIL
+  WHATSAPP
+  DOWNLOAD
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum NewsCategory {
+  CLIMATE
+  SECURITY
+  PUBLIC_ORDER
+  HEALTH
+  INFRASTRUCTURE
+  OTHER
+}
+
+// AUDIT LOG (Global Ledger)
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  action    String
+  entity    String
+  entityId  String   @map("entity_id")
+  ipAddress String?  @map("ip_address")
+  metadata  Json?
+  timestamp DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
+
+// USERS & REGIONS
+model Region {
+  id   String @id @default(uuid())
+  name String @unique
+  code String @unique
+
+  users            User[]
+  reports          RegionalReport[]
+  generatedReports Report[]
+  visits           Visit[]
+  documents        Document[]
+
+  // Advanced Territorial Management
+  assignedUsers User[] @relation("UserAssignedRegions")
+  municipalities Municipality[]
+
+  @@map("regions")
+}
+
+model Municipality {
+  id       String @id @default(uuid())
+  name     String
+  regionId String @map("region_id")
+  
+  region   Region @relation(fields: [regionId], references: [id])
+
+  users            User[]
+  assignedUsers    User[] @relation("UserAssignedMunicipalities")
+  reports          RegionalReport[]
+  generatedReports Report[]
+  visits           Visit[]
+  veredas          Vereda[]
+
+  @@unique([regionId, name])
+  @@map("municipalities")
+}
+
+model Vereda {
+  id             String @id @default(uuid())
+  name           String
+  municipalityId String @map("municipality_id")
+
+  municipality Municipality @relation(fields: [municipalityId], references: [id])
+  assignedUsers User[] @relation("UserAssignedVeredas")
+  
+  @@unique([municipalityId, name])
+  @@map("veredas")
+}
+
+model User {
+  id           String  @id @default(uuid())
+  email        String  @unique
+  passwordHash String  @map("password_hash")
+  fullName     String?  @map("full_name")
+  dni          String?  @unique // Cedula
+  phone        String?
+  role         Role    @default(USER)
+  isActive     Boolean @default(true) @map("is_active")
+  permissions  Json    @default("{}") // Matriz granular Silicon Valley
+
+  regionId       String? @map("region_id")
+  municipalityId String? @map("municipality_id")
+
+  region       Region?       @relation(fields: [regionId], references: [id])
+  municipality Municipality? @relation(fields: [municipalityId], references: [id])
+
+  // Advanced Territorial Management (Silicon Valley Style)
+  assignedRegions        Region[]       @relation("UserAssignedRegions")
+  assignedMunicipalities Municipality[] @relation("UserAssignedMunicipalities")
+  assignedVeredas        Vereda[]       @relation("UserAssignedVeredas")
+
+  documents         Document[]        @relation("UploadedDocuments")
+  comments          DocumentComment[]
+  news              RegionalReport[]
+  auditLogs         AuditLog[]
+  reports           Report[]          @relation("ReportGenerator")
+  authorizedReports Report[]          @relation("ReportAuthorizer")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  lastLogin DateTime? @map("last_login")
+
+  acceptedTerms Boolean   @default(false) @map("accepted_terms")
+  acceptedAt    DateTime? @map("accepted_at")
+
+  readReceipts NewsReadReceipt[]
+
+  // Territorial Management Relations
+  assignedVisits  Visit[]    @relation("VisitAssignee")
+  delegatedVisits Visit[]    @relation("VisitAssigner")
+  visitLogs       VisitLog[]
+  pushSubscription PushSubscription?
+
+  @@map("users")
+}
+
+// IMMUTABLE DOCUMENTS
+model Document {
+  id      String  @id @default(uuid())
+  title   String
+  url     String
+  version Int     @default(1)
+  hash    String? // SHA-256 integrity check
+
+  uploaderId String @map("uploader_id")
+  uploader   User   @relation("UploadedDocuments", fields: [uploaderId], references: [id])
+
+  regionId String? @map("region_id")
+  region   Region? @relation(fields: [regionId], references: [id])
+
+  comments DocumentComment[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("documents")
+}
+
+model DocumentComment {
+  id         String @id @default(uuid())
+  documentId String @map("document_id")
+  userId     String @map("user_id")
+  content    String
+
+  document Document @relation(fields: [documentId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("document_comments")
+}
+
+// REGIONAL NEWS & ALERTS
+model RegionalReport {
+  id             String       @id @default(uuid())
+  userId         String       @map("user_id")
+  regionId       String?      @map("region_id")
+  municipalityId String?      @map("municipality_id")
+  category       NewsCategory
+  priority       Priority
+  title          String
+  content        String
+  attachmentUrl  String?      @map("attachment_url")
+
+  // Ubicación manual para zonas no registradas
+  locationManualRegion       String? @map("location_manual_region")
+  locationManualDepartment   String? @map("location_manual_department")
+  locationManualMunicipality String? @map("location_manual_municipality")
+
+  user         User          @relation(fields: [userId], references: [id])
+  region       Region?       @relation(fields: [regionId], references: [id])
+  municipality Municipality? @relation(fields: [municipalityId], references: [id])
+
+  alerts       Alert[]
+  readReceipts NewsReadReceipt[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("regional_reports")
+}
+
+model Alert {
+  id       String   @id @default(uuid())
+  reportId String   @map("report_id")
+  priority Priority
+  status   String   @default("NEW") // NEW, READ, RESOLVED, MANAGED
+
+  report RegionalReport @relation(fields: [reportId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("alerts")
+}
+
+// ENTERPRISE REPORTING SYSTEM (New Requirement)
+model Report {
+  id         String       @id @default(uuid())
+  code       String       @unique // e.g., INF-REG-8F3A
+  type       ReportType
+  format     ReportFormat
+  url        String
+  hashSha256 String       @map("hash_sha256")
+
+  generatedById  String  @map("generated_by")
+  authorizedById String? @map("authorized_by")
+
+  regionId       String? @map("region_id")
+  municipalityId String? @map("municipality_id")
+
+  metadata Json? // Filters applied, period, specific params
+
+  generatedBy  User          @relation("ReportGenerator", fields: [generatedById], references: [id])
+  authorizedBy User?         @relation("ReportAuthorizer", fields: [authorizedById], references: [id])
+  region       Region?       @relation(fields: [regionId], references: [id])
+  municipality Municipality? @relation(fields: [municipalityId], references: [id])
+
+  deliveries ReportDelivery[]
+
+  generatedAt DateTime @default(now()) @map("generated_at")
+
+  @@map("reports")
+}
+
+model ReportDelivery {
+  id        String          @id @default(uuid())
+  reportId  String          @map("report_id")
+  recipient String // Email or User ID
+  channel   DeliveryChannel
+  status    String // SENT, DELIVERED, DOWNLOADED
+  sentAt    DateTime        @default(now()) @map("sent_at")
+
+  report Report @relation(fields: [reportId], references: [id])
+
+  @@map("report_deliveries")
+}
+
+model NewsReadReceipt {
+  id       String   @id @default(uuid())
+  userId   String   @map("user_id")
+  reportId String   @map("report_id")
+  readAt   DateTime @default(now()) @map("read_at")
+
+  user   User           @relation(fields: [userId], references: [id])
+  report RegionalReport @relation(fields: [reportId], references: [id])
+
+  @@unique([userId, reportId])
+  @@map("news_read_receipts")
+}
+
+// TERRITORIAL MANAGEMENT (Field Ops)
+enum VisitSource {
+  MASSIVE // Carga Masiva
+  MANUAL // Ingreso Manual (Gestor)
+  ENRICHED // Enriquecido en Campo
+}
+
+enum VisitStatus {
+  PENDING
+  ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+  VERIFIED
+  CANCELLED
+}
+
+enum VisitReliability {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Visit {
+  id String @id @default(uuid())
+
+  // Data Source & Quality
+  source      VisitSource      @default(MANUAL)
+  reliability VisitReliability @default(LOW)
+
+  // Primary Data (Loose Coupling)
+  citizenId   String? @map("citizen_id")
+  fullName    String? @map("full_name")
+  addressText String  @map("address_text") // "Dirección escrita"
+  phone       String?
+
+  // Location (Progressive Enrichment)
+  latitude    Float?
+  longitude   Float?
+  gpsAccuracy Float?    @map("gps_accuracy")
+  verifiedAt  DateTime? @map("verified_at")
+
+  // Operation
+  status         VisitStatus @default(PENDING)
+  priority       Priority    @default(MEDIUM)
+  regionId       String      @map("region_id")
+  municipalityId String?     @map("municipality_id")
+  vereda         String?
+  area           String?     // Para ingresos manuales de municipios/zonas
+
+  // Assignment (Push/Pull)
+  assignedToId String?   @map("assigned_to")
+  assignedById String?   @map("assigned_by")
+  assignedAt   DateTime? @map("assigned_at")
+  scheduledAt  DateTime? @map("scheduled_at")
+
+  // Relations
+  region       Region        @relation(fields: [regionId], references: [id])
+  municipality Municipality? @relation(fields: [municipalityId], references: [id])
+  assignedTo   User?         @relation("VisitAssignee", fields: [assignedToId], references: [id])
+  assignedBy   User?         @relation("VisitAssigner", fields: [assignedById], references: [id])
+
+  logs VisitLog[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("visits")
+}
+
+model VisitLog {
+  id       String @id @default(uuid())
+  visitId  String @map("visit_id")
+  userId   String @map("user_id")
+  action   String // CHECK_IN, UPDATE_DATA, ASSIGN, STATUS_CHANGE
+  metadata Json? // Snapshot/Context
+
+  visit Visit @relation(fields: [visitId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  timestamp DateTime @default(now())
+
+  @@map("visit_logs")
+}
+
+model PushSubscription {
+  id             String   @id @default(uuid())
+  userId         String   @unique @map("user_id")
+  endpoint       String   @db.Text
+  p256dh         String
+  auth           String
+  expirationTime Float?   @map("expiration_time")
+  
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("push_subscriptions")
+}

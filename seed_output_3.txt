@@ -1,0 +1,37 @@
+Starting Test User Seed (V2) - Auth & Public Sync...
+Processing admin@test.com...
+Failed to delete public user admin@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42703`. Message: `column "user_id" does not exist`
+Deleted auth user admin@test.com: 1
+Failed to create/update auth user admin@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+Processing coord@test.com...
+
+Raw query failed. Code: `23505`. Message: `Key (email)=(admin@test.com) already exists.`
+Failed to delete public user coord@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `23503`. Message: `update or delete on table "regional_reports" violates foreign key constraint "alerts_report_id_fkey" on table "alerts"`
+Deleted auth user coord@test.com: 0
+Failed to create/update auth user coord@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `23505`. Message: `Key (email)=(coord@test.com) already exists.`
+Processing gestor@test.com...
+Failed to delete public user gestor@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42703`. Message: `column "user_id" does not exist`
+Deleted auth user gestor@test.com: 1
+Failed to create/update auth user gestor@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `23505`. Message: `Key (email)=(gestor@test.com) already exists.`

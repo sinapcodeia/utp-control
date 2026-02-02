@@ -1,0 +1,37 @@
+Starting Test User Seed (V2) - Auth & Public Sync...
+Processing admin@test.com...
+Deleted public user admin@test.com: 1
+Deleted auth user admin@test.com: 0
+Failed to create/update auth user admin@test.com: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\UTP\CONTROL\apps\api\scripts\seed-test-users-v2.js:105:49
+
+  102 // We need to wait a ms or just update public.users immediately.
+  103 
+  104 // Check if user exists in public
+ÔåÆ 105 const check = await prisma.user.findUnique(
+The column `users.passwordHash` does not exist in the current database.
+Processing coord@test.com...
+Failed to delete public user coord@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `23503`. Message: `update or delete on table "users" violates foreign key constraint "regional_reports_user_id_fkey" on table "regional_reports"`
+Deleted auth user coord@test.com: 1
+Failed to create/update auth user coord@test.com: 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `23505`. Message: `Key (email)=(coord@test.com) already exists.`
+Processing gestor@test.com...
+Deleted public user gestor@test.com: 1
+Deleted auth user gestor@test.com: 1
+Failed to create/update auth user gestor@test.com: 
+Invalid `prisma.user.findUnique()` invocation in
+C:\UTP\CONTROL\apps\api\scripts\seed-test-users-v2.js:105:49
+
+  102 // We need to wait a ms or just update public.users immediately.
+  103 
+  104 // Check if user exists in public
+ÔåÆ 105 const check = await prisma.user.findUnique(
+The column `users.passwordHash` does not exist in the current database.

@@ -1,0 +1,217 @@
+Starting Test User Seed (V2) - Auth & Public Sync...
+Processing admin@test.com...
+Deleted public user admin@test.com: 1
+Deleted auth user admin@test.com: 1
+Failed to create/update auth user admin@test.com: 
+Invalid `prisma.user.update()` invocation in
+C:\UTP\CONTROL\apps\api\scripts\seed-test-users-v2.js:140:35
+
+  137 }
+  138 
+  139 // Update Public User with Role and Permissions
+ÔåÆ 140 await prisma.user.update({
+        where: {
+          email: "admin@test.com"
+        },
+        data: {
+          role: "ADMIN",
+          permissions: {
+            dir: {
+              view: true,
+              edit: true,
+              delete: true
+            },
+            news: {
+              view: true,
+              edit: true,
+              create: true,
+              edit_own: true,
+              edit_all: true,
+              delete: true
+            },
+            staff: {
+              invite: true,
+              manage_perms: true,
+              block: true
+            },
+            territory: {
+              allRegions: true,
+              regions: []
+            }
+          },
+          region_id: null,
+          ~~~~~~~~~
+Processing coord@test.com...
+      ?   id?: String | StringFieldUpdateOperationsInput,
+      ?   email?: String | StringFieldUpdateOperationsInput,
+      ?   passwordHash?: String | StringFieldUpdateOperationsInput,
+      ?   fullName?: String | StringFieldUpdateOperationsInput,
+      ?   dni?: String | StringFieldUpdateOperationsInput,
+      ?   phone?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   isActive?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   lastLogin?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   acceptedTerms?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   acceptedAt?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   region?: RegionUpdateOneWithoutUsersNestedInput,
+      ?   municipality?: MunicipalityUpdateOneWithoutUsersNestedInput,
+      ?   assignedRegions?: RegionUpdateManyWithoutAssignedUsersNestedInput,
+      ?   assignedMunicipalities?: MunicipalityUpdateManyWithoutAssignedUsersNestedInput,
+      ?   assignedVeredas?: VeredaUpdateManyWithoutAssignedUsersNestedInput,
+      ?   documents?: DocumentUpdateManyWithoutUploaderNestedInput,
+      ?   comments?: DocumentCommentUpdateManyWithoutUserNestedInput,
+      ?   news?: RegionalReportUpdateManyWithoutUserNestedInput,
+      ?   auditLogs?: AuditLogUpdateManyWithoutUserNestedInput,
+      ?   reports?: ReportUpdateManyWithoutGeneratedByNestedInput,
+      ?   authorizedReports?: ReportUpdateManyWithoutAuthorizedByNestedInput,
+      ?   readReceipts?: NewsReadReceiptUpdateManyWithoutUserNestedInput,
+      ?   assignedVisits?: VisitUpdateManyWithoutAssignedToNestedInput,
+      ?   delegatedVisits?: VisitUpdateManyWithoutAssignedByNestedInput,
+      ?   visitLogs?: VisitLogUpdateManyWithoutUserNestedInput
+        }
+      })
+
+Unknown argument `region_id`. Did you mean `region`? Available options are marked with ?.
+Deleted public user coord@test.com: 1
+Deleted auth user coord@test.com: 1
+Failed to create/update auth user coord@test.com: 
+Invalid `prisma.user.update()` invocation in
+C:\UTP\CONTROL\apps\api\scripts\seed-test-users-v2.js:140:35
+
+  137 }
+  138 
+  139 // Update Public User with Role and Permissions
+ÔåÆ 140 await prisma.user.update({
+        where: {
+          email: "coord@test.com"
+        },
+        data: {
+          role: "COORDINATOR",
+          permissions: {
+            dir: {
+              view: true,
+              edit: true,
+              delete: false
+            },
+            news: {
+              view: true,
+              edit: true,
+              create: true,
+              edit_own: true,
+              edit_all: false,
+              delete: true
+            },
+            staff: {
+              invite: true,
+              manage_perms: false,
+              block: false
+            },
+            territory: {
+              allRegions: false,
+              regions: []
+            }
+          },
+          region_id: "11c975c7-a50a-4a74-86f6-50beef78a663",
+          ~~~~~~~~~
+      ?   id?: String | StringFieldUpdateOperationsInput,
+      ?   email?: String | StringFieldUpdateOperationsInput,
+      ?   passwordHash?: String | StringFieldUpdateOperationsInput,
+      ?   fullName?: String | StringFieldUpdateOperationsInput,
+      ?   dni?: String | StringFieldUpdateOperationsInput,
+      ?   phone?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   isActive?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   lastLogin?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   acceptedTerms?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   acceptedAt?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   region?: RegionUpdateOneWithoutUsersNestedInput,
+      ?   municipality?: MunicipalityUpdateOneWithoutUsersNestedInput,
+      ?   assignedRegions?: RegionUpdateManyWithoutAssignedUsersNestedInput,
+      ?   assignedMunicipalities?: MunicipalityUpdateManyWithoutAssignedUsersNestedInput,
+      ?   assignedVeredas?: VeredaUpdateManyWithoutAssignedUsersNestedInput,
+      ?   documents?: DocumentUpdateManyWithoutUploaderNestedInput,
+      ?   comments?: DocumentCommentUpdateManyWithoutUserNestedInput,
+      ?   news?: RegionalReportUpdateManyWithoutUserNestedInput,
+      ?   auditLogs?: AuditLogUpdateManyWithoutUserNestedInput,
+      ?   reports?: ReportUpdateManyWithoutGeneratedByNestedInput,
+      ?   authorizedReports?: ReportUpdateManyWithoutAuthorizedByNestedInput,
+      ?   readReceipts?: NewsReadReceiptUpdateManyWithoutUserNestedInput,
+      ?   assignedVisits?: VisitUpdateManyWithoutAssignedToNestedInput,
+      ?   delegatedVisits?: VisitUpdateManyWithoutAssignedByNestedInput,
+      ?   visitLogs?: VisitLogUpdateManyWithoutUserNestedInput
+        }
+      })
+
+Unknown argument `region_id`. Did you mean `region`? Available options are marked with ?.
+Processing gestor@test.com...
+Deleted public user gestor@test.com: 1
+Deleted auth user gestor@test.com: 1
+Failed to create/update auth user gestor@test.com: 
+Invalid `prisma.user.update()` invocation in
+C:\UTP\CONTROL\apps\api\scripts\seed-test-users-v2.js:140:35
+
+  137 }
+  138 
+  139 // Update Public User with Role and Permissions
+ÔåÆ 140 await prisma.user.update({
+        where: {
+          email: "gestor@test.com"
+        },
+        data: {
+          role: "USER",
+          permissions: {
+            dir: {
+              view: true,
+              edit: false,
+              delete: false
+            },
+            news: {
+              view: true,
+              edit: false,
+              create: false,
+              edit_own: false,
+              edit_all: false,
+              delete: false
+            },
+            staff: {
+              invite: false,
+              manage_perms: false,
+              block: false
+            },
+            territory: {
+              allRegions: false,
+              regions: []
+            }
+          },
+          region_id: "11c975c7-a50a-4a74-86f6-50beef78a663",
+          ~~~~~~~~~
+      ?   id?: String | StringFieldUpdateOperationsInput,
+      ?   email?: String | StringFieldUpdateOperationsInput,
+      ?   passwordHash?: String | StringFieldUpdateOperationsInput,
+      ?   fullName?: String | StringFieldUpdateOperationsInput,
+      ?   dni?: String | StringFieldUpdateOperationsInput,
+      ?   phone?: String | NullableStringFieldUpdateOperationsInput | Null,
+      ?   isActive?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   createdAt?: DateTime | DateTimeFieldUpdateOperationsInput,
+      ?   lastLogin?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   acceptedTerms?: Boolean | BoolFieldUpdateOperationsInput,
+      ?   acceptedAt?: DateTime | NullableDateTimeFieldUpdateOperationsInput | Null,
+      ?   region?: RegionUpdateOneWithoutUsersNestedInput,
+      ?   municipality?: MunicipalityUpdateOneWithoutUsersNestedInput,
+      ?   assignedRegions?: RegionUpdateManyWithoutAssignedUsersNestedInput,
+      ?   assignedMunicipalities?: MunicipalityUpdateManyWithoutAssignedUsersNestedInput,
+      ?   assignedVeredas?: VeredaUpdateManyWithoutAssignedUsersNestedInput,
+      ?   documents?: DocumentUpdateManyWithoutUploaderNestedInput,
+      ?   comments?: DocumentCommentUpdateManyWithoutUserNestedInput,
+      ?   news?: RegionalReportUpdateManyWithoutUserNestedInput,
+      ?   auditLogs?: AuditLogUpdateManyWithoutUserNestedInput,
+      ?   reports?: ReportUpdateManyWithoutGeneratedByNestedInput,
+      ?   authorizedReports?: ReportUpdateManyWithoutAuthorizedByNestedInput,
+      ?   readReceipts?: NewsReadReceiptUpdateManyWithoutUserNestedInput,
+      ?   assignedVisits?: VisitUpdateManyWithoutAssignedToNestedInput,
+      ?   delegatedVisits?: VisitUpdateManyWithoutAssignedByNestedInput,
+      ?   visitLogs?: VisitLogUpdateManyWithoutUserNestedInput
+        }
+      })
+
+Unknown argument `region_id`. Did you mean `region`? Available options are marked with ?.

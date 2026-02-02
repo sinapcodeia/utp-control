@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Reportes</title>
+</head>
+<body>
+    <h1>Prueba de Conexión al Módulo de Reportes</h1>
+    <button onclick="testReports()">Probar Endpoint /reports</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function testReports() {
+            const resultEl = document.getElementById('result');
+            resultEl.textContent = 'Probando...';
+
+            try {
+                // Nota: En producción, el token vendría de Supabase
+                const response = await fetch('http://localhost:3001/reports', {
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                const data = await response.json();
+                
+                resultEl.textContent = `Status: ${response.status}\n\n` + 
+                                      `Response:\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                resultEl.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
